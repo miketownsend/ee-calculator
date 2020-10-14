@@ -41,7 +41,7 @@ describe('when the user enters a number', () => {
   })
 })
 
-describe('when the user tries to add a number using the plus button', () => {
+describe('when the user tries different operations', () => {
   const clickButtonWithValue = (wrapper, value) => {
     fireEvent.click(wrapper.getByLabelText(value))
   }
@@ -57,5 +57,14 @@ describe('when the user tries to add a number using the plus button', () => {
     clickButtonWithValue(wrapper, '6')
     clickButtonWithValue(wrapper, 'equals')
     expect(getResult(wrapper)).toBe('11')
+  })
+
+  it('should multiply the result of the two numbers', () => {
+    const wrapper = render(<App />)
+    clickButtonWithValue(wrapper, '5')
+    clickButtonWithValue(wrapper, 'multiply')
+    clickButtonWithValue(wrapper, '6')
+    clickButtonWithValue(wrapper, 'equals')
+    expect(getResult(wrapper)).toBe('30')
   })
 })

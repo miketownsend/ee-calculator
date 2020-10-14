@@ -18,9 +18,11 @@ const CalculatorKey = ({
 
 const EQUALS = 'equals'
 const PLUS = 'plus'
+const MULTIPLY = 'multiply'
 
 const operations = {
   [PLUS]: (currentValue, storedValue) => currentValue + storedValue,
+  [MULTIPLY]: (currentValue, storedValue) => currentValue * storedValue,
 }
 
 const Calculator = () => {
@@ -82,7 +84,11 @@ const Calculator = () => {
             onClick={onClickNumber(number)}
           />
         ))}
-        <li />
+        <CalculatorKey
+          ariaLabel={MULTIPLY}
+          value="*"
+          onClick={onClickOperator(MULTIPLY)}
+        />
         <CalculatorKey value={0} onClick={onClickNumber(0)} />
         <li />
         <CalculatorKey ariaLabel={EQUALS} value="=" onClick={onClickEquals}>
@@ -92,9 +98,7 @@ const Calculator = () => {
           ariaLabel={PLUS}
           value="+"
           onClick={onClickOperator(PLUS)}
-        >
-          +
-        </CalculatorKey>
+        />
       </ul>
     </div>
   )
