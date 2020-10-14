@@ -3,8 +3,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) by Mike Townsend.
 The version number is: `68248247cd23ebffaa256f583e0e4ce05b4a0b86`
 
-In the project directory, you can run:
-
 ## Installation:
 
 - Install (node from here)[https://nodejs.org/en/]
