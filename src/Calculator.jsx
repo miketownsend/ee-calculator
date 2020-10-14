@@ -16,14 +16,35 @@ const CalculatorKey = ({
   )
 }
 
+const EQUALS = 'equals'
+const PLUS = 'plus'
+
+const operations = {
+  [PLUS]: (currentValue, storedValue) => currentValue + storedValue,
+}
+
 const Calculator = () => {
   const [currentValue, setCurrentValue] = useState(0)
-  // const [value, setValue] = useState(null)
-  // const [operator, setOperator] = useState(null)
+  const [storedValue, setStoredValue] = useState(null)
+  const [storedOperator, setStoredOperator] = useState(null)
 
   const onClickNumber = (value) => () => {
     if (!currentValue) setCurrentValue(value)
     if (currentValue) setCurrentValue(parseInt(`${currentValue}${value}`, 10))
+  }
+
+  const onClickEquals = () => {
+    if (storedValue !== null && storedOperator !== null) {
+      setCurrentValue(operations[storedOperator](currentValue, storedValue))
+      setStoredValue(null)
+      setStoredOperator(null)
+    }
+  }
+
+  const onClickOperator = (operator = PLUS) => () => {
+    setStoredOperator(operator)
+    setStoredValue(currentValue)
+    setCurrentValue(0)
   }
 
   return (
@@ -64,10 +85,14 @@ const Calculator = () => {
         <li />
         <CalculatorKey value={0} onClick={onClickNumber(0)} />
         <li />
-        <CalculatorKey ariaLabel="equals" value="=">
+        <CalculatorKey ariaLabel={EQUALS} value="=" onClick={onClickEquals}>
           =
         </CalculatorKey>
-        <CalculatorKey ariaLabel="plus" value="+">
+        <CalculatorKey
+          ariaLabel={PLUS}
+          value="+"
+          onClick={onClickOperator(PLUS)}
+        >
           +
         </CalculatorKey>
       </ul>

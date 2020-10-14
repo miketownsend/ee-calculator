@@ -2,7 +2,7 @@ import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import App from './App'
 
-describe('Calculator layout', () => {
+describe('when the app is rendered', () => {
   it('has a button for each of the numbers 0 - 9', () => {
     const { getByText } = render(<App />)
 
@@ -24,7 +24,7 @@ describe('Calculator layout', () => {
   })
 })
 
-describe('Calculator plus operator', () => {
+describe('when the user enters a number', () => {
   const clickButtonWithValue = (wrapper, value) => {
     fireEvent.click(wrapper.getByLabelText(value))
   }
@@ -38,5 +38,24 @@ describe('Calculator plus operator', () => {
     clickButtonWithValue(wrapper, '5')
     clickButtonWithValue(wrapper, '6')
     expect(getResult(wrapper)).toBe('56')
+  })
+})
+
+describe('when the user tries to add a number using the plus button', () => {
+  const clickButtonWithValue = (wrapper, value) => {
+    fireEvent.click(wrapper.getByLabelText(value))
+  }
+
+  const getResult = (wrapper) => {
+    return wrapper.getByLabelText(/result/i).textContent
+  }
+
+  it('should result of the two numbers', () => {
+    const wrapper = render(<App />)
+    clickButtonWithValue(wrapper, '5')
+    clickButtonWithValue(wrapper, 'plus')
+    clickButtonWithValue(wrapper, '6')
+    clickButtonWithValue(wrapper, 'equals')
+    expect(getResult(wrapper)).toBe('11')
   })
 })
