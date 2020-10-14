@@ -11,13 +11,15 @@ describe('Calculator layout', () => {
     }
   })
 
-  it('has a button for the operators + - / * and =', () => {
+  it('has a button for the operators + and =', () => {
     const { getByText } = render(<App />)
 
     expect(getByText('+', { selector: 'button' })).toBeInTheDocument()
-    expect(getByText('-', { selector: 'button' })).toBeInTheDocument()
-    expect(getByText('/', { selector: 'button' })).toBeInTheDocument()
-    expect(getByText('*', { selector: 'button' })).toBeInTheDocument()
     expect(getByText('=', { selector: 'button' })).toBeInTheDocument()
+  })
+
+  it('shows an are to show the result', () => {
+    const { getByLabelText } = render(<App />)
+    expect(getByLabelText(/result/i)).toBeInTheDocument()
   })
 })

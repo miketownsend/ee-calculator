@@ -29,3 +29,12 @@
 .calculatorKeys__key button:hover {
   background-color: rgba(23, 149, 212, 0.1);
 }
+
+.calculatorResult {
+  color: black;
+  padding: 30px;
+  font-size: calc(1em + 1vw);
+  background-color: #e0e0e0;
+  text-align: right;
+  margin-top: 50px;
+}

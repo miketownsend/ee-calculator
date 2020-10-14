@@ -2,10 +2,12 @@ import React from 'react'
 import { range } from 'lodash/fp'
 import './Calculator.css'
 
-const CalculatorKey = ({ children = '' }) => {
+const CalculatorKey = ({ value = '', ariaLabel = '' }) => {
   return (
     <li className="calculatorKeys__key">
-      <button type="button">{children}</button>
+      <button aria-label={ariaLabel} type="button">
+        {value}
+      </button>
     </li>
   )
 }
@@ -13,23 +15,36 @@ const CalculatorKey = ({ children = '' }) => {
 const Calculator = () => {
   return (
     <div className="calculator">
+      <div
+        id="result"
+        aria-label="result"
+        role="presentation"
+        readOnly
+        className="calculatorResult"
+      >
+        0
+      </div>
       <ul className="calculatorKeys">
         {range(7, 10).map((number) => (
-          <CalculatorKey key={`key-${number}`}>{number}</CalculatorKey>
+          <CalculatorKey key={`key-${number}`} value={number} />
         ))}
-        <CalculatorKey>/</CalculatorKey>
-        {range(4, 7).map((number) => (
-          <CalculatorKey key={`key-${number}`}>{number}</CalculatorKey>
-        ))}
-        <CalculatorKey>*</CalculatorKey>
-        {range(1, 4).map((number) => (
-          <CalculatorKey key={`key-${number}`}>{number}</CalculatorKey>
-        ))}
-        <CalculatorKey>-</CalculatorKey>
-        <CalculatorKey>0</CalculatorKey>
         <li />
-        <CalculatorKey>=</CalculatorKey>
-        <CalculatorKey>+</CalculatorKey>
+        {range(4, 7).map((number) => (
+          <CalculatorKey key={`key-${number}`} value={number} />
+        ))}
+        <li />
+        {range(1, 4).map((number) => (
+          <CalculatorKey key={`key-${number}`} value={number} />
+        ))}
+        <li />
+        <CalculatorKey value={0} />
+        <li />
+        <CalculatorKey ariaLabel="equals" value="=">
+          =
+        </CalculatorKey>
+        <CalculatorKey ariaLabel="plus" value="+">
+          +
+        </CalculatorKey>
       </ul>
     </div>
   )
